@@ -1,0 +1,35 @@
+Bài 9: Xử lý sự cố bảo mật file trên Server OrderTech bằng Terminal
+Bước 1: Xác định vị trí
+pwd
+
+Lệnh pwd dùng để kiểm tra đường dẫn của thư mục hiện tại trên máy chủ.
+
+Bước 2: Xác nhận sự cố
+ls .\public
+
+Lệnh ls dùng để liệt kê các file trong thư mục public. Qua đó xác nhận có db_password.txt và hacker_log.bat cần xử lý.
+
+Bước 3: Tạo thư mục và di chuyển file
+mkdir .\secrets
+
+Tạo thư mục secrets ngang hàng với public.
+
+Move-Item .\public\db_password.txt .\secrets\
+
+Di chuyển file db_password.txt từ public vào secrets.
+
+Cần tạo secrets trước để PowerShell hiểu đây là thư mục đích, tránh trường hợp hiểu secrets là tên mới của file.
+
+Bước 4: Xóa file mã độc
+Remove-Item .\public\hacker_log.bat -Force
+
+Xóa file hacker_log.bat khỏi thư mục public.
+
+-Force giúp thực hiện thao tác xóa ngay cả khi file có thuộc tính hạn chế.
+
+Các lệnh sử dụng
+pwd
+ls .\public
+mkdir .\secrets
+Move-Item .\public\db_password.txt .\secrets\
+Remove-Item .\public\hacker_log.bat -Force
